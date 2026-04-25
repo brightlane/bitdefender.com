@@ -1,0 +1,18 @@
+# =========================
+# ROBOTS.TXT - Brightlane Bitdefender Affiliate Site
+# =========================
+
+User-agent: *
+Allow: /
+
+# Block admin / system files (not needed on GitHub Pages but good practice)
+Disallow: /README.md
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.github/
+
+# Sitemap location
+Sitemap: https://brightlane.github.io/bitdefender.com/sitemap.xml
+
+# Crawl delay (optional - helps avoid aggressive crawling)
+Crawl-delay: 1
