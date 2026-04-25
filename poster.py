@@ -1,49 +1,58 @@
 import json
-import random
-import time
+import requests
 from datetime import datetime
+import os
+
+QUEUE_FILE = "queue.json"
+
+MASTODON_INSTANCE = os.environ["MASTODON_INSTANCE"]
+MASTODON_TOKEN = os.environ["MASTODON_TOKEN"]
+
+def load_queue():
+    with open(QUEUE_FILE, "r") as f:
+        return json.load(f)
+
+def save_queue(queue):
+    with open(QUEUE_FILE, "w") as f:
+        json.dump(queue, f, indent=2)
 
 # -----------------------------
-# Load posts
-# -----------------------------
-def load_posts():
-    with open("posts.json", "r") as file:
-        return json.load(file)
-
-# -----------------------------
-# Replace this with real API call
+# REAL SOCIAL MEDIA POST
 # -----------------------------
 def post_to_social_media(text):
-    """
-    Replace this function with:
-    - X (Twitter) API (tweepy)
-    - Facebook Graph API
-    - Instagram Graph API
-    """
+    url = f"{MASTODON_INSTANCE}/api/v1/statuses"
 
-    print("\n========================")
-    print(f"POST TIME: {datetime.now()}")
-    print("------------------------")
-    print(text)
-    print("========================\n")
+    headers = {
+        "Authorization": f"Bearer {MASTODON_TOKEN}"
+    }
 
-# -----------------------------
-# Choose and post one message
-# -----------------------------
-def run_post():
-    posts = load_posts()
-    post = random.choice(posts)
-    post_to_social_media(post["text"])
+    data = {
+        "status": text
+    }
 
-# -----------------------------
-# Run daily loop
-# -----------------------------
-def start_scheduler(interval_seconds=86400):
-    while True:
-        run_post()
+    response = requests.post(url, headers=headers, data=data)
 
-        # 24 hours = 86400 seconds
-        time.sleep(interval_seconds)
+    if response.status_code != 200:
+        raise Exception(f"Failed to post: {response.text}")
+
+    return response.json()
+
+def run_poster():
+    queue = load_queue()
+
+    for item in queue:
+        if item["status"] == "pending":
+
+            result = post_to_social_media(item["text"])
+
+            item["status"] = "posted"
+            item["posted_at"] = str(datetime.now())
+            item["post_id"] = result.get("id")
+
+            save_queue(queue)
+
+            print("POSTED SUCCESSFULLY:", result.get("url"))
+            break
 
 if __name__ == "__main__":
-    start_scheduler()
+    run_poster()
