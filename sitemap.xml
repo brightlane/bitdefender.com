@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- MAIN LANDING -->
+  <url>
+    <loc>https://brightlane.github.io/bitdefender.com/</loc>
+    <priority>1.0</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <!-- CORE PRODUCT PAGES -->
+  <url>
+    <loc>https://brightlane.github.io/bitdefender.com/total-security.html</loc>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://brightlane.github.io/bitdefender.com/premium-security.html</loc>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://brightlane.github.io/bitdefender.com/antivirus-plus.html</loc>
+    <priority>0.85</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://brightlane.github.io/bitdefender.com/mobile-security.html</loc>
+    <priority>0.85</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <!-- PRIVACY / VPN -->
+  <url>
+    <loc>https://brightlane.github.io/bitdefender.com/vpn.html</loc>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <!-- BLOG -->
+  <url>
+    <loc>https://brightlane.github.io/bitdefender.com/blog.html</loc>
+    <priority>0.9</priority>
+    <changefreq>daily</changefreq>
+  </url>
+
+  <!-- SUPPORT / INFO -->
+  <url>
+    <loc>https://brightlane.github.io/bitdefender.com/support.html</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://brightlane.github.io/bitdefender.com/faq.html</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <!-- AFFILIATE TRACKING LANDING -->
+  <url>
+    <loc>https://get.descript.com/ejfgu2ujux4j</loc>
+    <priority>1.0</priority>
+    <changefreq>always</changefreq>
+  </url>
+
+</urlset>
