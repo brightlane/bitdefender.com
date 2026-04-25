@@ -1,0 +1,21 @@
+{
+  "hooks": [
+    "Most people don’t realize this about online security:",
+    "Quick cybersecurity tip:",
+    "Something important about protecting your data:",
+    "You should know this about internet safety:"
+  ],
+  "messages": [
+    "Malware can run silently in the background without you noticing.",
+    "Public Wi-Fi can expose your personal information to attackers.",
+    "Phishing emails are still one of the most common threats today.",
+    "Weak passwords are one of the biggest security risks online."
+  ],
+  "closers": [
+    "Stay protected every day.",
+    "Security matters more than ever.",
+    "Take your digital safety seriously.",
+    "Protect your devices before it's too late."
+  ],
+  "link": "https://get.bitdefender.com/6949dd39475d"
+}
