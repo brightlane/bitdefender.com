@@ -2,6 +2,7 @@ import tweepy
 import facebook
 from linkedin_api import Linkedin
 from datetime import datetime
+import random
 
 # Twitter API credentials
 twitter_consumer_key = 'YOUR_TWITTER_CONSUMER_KEY'
@@ -17,26 +18,48 @@ facebook_page_id = 'YOUR_FACEBOOK_PAGE_ID'  # You can get this from your Faceboo
 linkedin_username = 'YOUR_LINKEDIN_USERNAME'
 linkedin_password = 'YOUR_LINKEDIN_PASSWORD'
 
-# Define post content
-post_content = """
-🚨 **Daily Question Time!** 🚨  
-Let’s talk **cybersecurity**! 🔐
+# Predefined content for variation (keeping the questions intact)
+questions = [
+    "What do you think is the best antivirus software in 2026?",
+    "Is Bitdefender worth the hype?",
+    "How do you get Bitdefender at the cheapest price?"
+]
 
-👉 **Question 1**: *What do you think is the best antivirus software in 2026?*  
-With tech always advancing, we need to stay ahead. Which antivirus will dominate the market in a few years? Share your thoughts and predictions!
+# Add variations for dynamic content (such as new hashtags, etc.)
+hashtags = [
+    "#Cybersecurity", "#Antivirus", "#Bitdefender", "#BestAntivirus2026", 
+    "#TechTips", "#Security", "#OnlineProtection", "#DigitalSafety", "#SaveOnTech"
+]
 
-👉 **Question 2**: *Is Bitdefender worth the hype?*  
-I've been hearing a lot about **Bitdefender** lately, but is it actually as good as people say? What’s your experience with it? Pros, cons, and everything in between—let’s discuss!
+# Function to generate dynamic post content
+def generate_post_content():
+    timestamp = datetime.now().strftime("%B %d, %Y %H:%M:%S")  # Add timestamp for freshness
 
-👉 **Question 3**: *How do you get Bitdefender at the cheapest price?*  
-If you’ve got tips on snagging **Bitdefender** for a great deal, drop them below! I’m looking to get the best protection without breaking the bank. 💸  
-And for a detailed guide on Bitdefender, check out this page: [https://brightlane.github.io/bitdefender.com/](https://brightlane.github.io/bitdefender.com/)
+    # Randomly select 2 out of the 3 questions to add variety
+    selected_questions = random.sample(questions, 2)
 
-💬 Let me know what you think in the comments or by DMing me!  
-Let’s keep our devices safe and secure together!
+    # Choose 3 random hashtags from the list
+    selected_hashtags = random.sample(hashtags, 3)
 
-#Cybersecurity #Antivirus #Bitdefender #BestAntivirus2026 #TechTips #Security #OnlineProtection #DigitalSafety #SaveOnTech
-"""
+    # Construct the post content with Quora reference
+    post_content = f"""
+    🚨 **Daily Question Time!** 🚨  
+    Let’s talk **cybersecurity**! 🔐
+
+    👉 **Question 1**: *{selected_questions[0]}*  
+    👉 **Question 2**: *{selected_questions[1]}*  
+
+    💬 Let me know what you think in the comments or by DMing me!  
+    Let’s keep our devices safe and secure together!
+
+    ⏰ Posted on: {timestamp}
+
+    🔗 Join the discussion and answer on my Quora page here: [https://www.quora.com/What-is-the-best-antivirus-in-2026](https://www.quora.com/What-is-the-best-antivirus-in-2026)
+
+    {', '.join(selected_hashtags)}
+    """
+
+    return post_content
 
 # Function to post on Twitter
 def post_to_twitter():
@@ -46,6 +69,7 @@ def post_to_twitter():
     )
     api = tweepy.API(auth)
     try:
+        post_content = generate_post_content()
         api.update_status(post_content)
         print(f"Post successfully made to Twitter at {datetime.now()}")
     except tweepy.TweepError as e:
@@ -55,6 +79,7 @@ def post_to_twitter():
 def post_to_facebook():
     graph = facebook.GraphAPI(access_token=facebook_access_token)
     try:
+        post_content = generate_post_content()
         graph.put_object(f'{facebook_page_id}/feed', message=post_content)
         print(f"Post successfully made to Facebook at {datetime.now()}")
     except facebook.GraphAPIError as e:
@@ -64,6 +89,7 @@ def post_to_facebook():
 def post_to_linkedin():
     linkedin_api = Linkedin(linkedin_username, linkedin_password)
     try:
+        post_content = generate_post_content()
         linkedin_api.submit_share(post_content)
         print(f"Post successfully made to LinkedIn at {datetime.now()}")
     except Exception as e:
